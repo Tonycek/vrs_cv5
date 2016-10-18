@@ -32,10 +32,10 @@ void initNVIC(){
 }
 
 void ADC1_IRQHandler (void){
-	uint16_t value;
+	//uint16_t value;
 	if(ADC1->SR & ADC_SR_EOC)
 	{
-		value = ADC1->DR;
+		uint16_t value = ADC1->DR;
 	}
 }
 

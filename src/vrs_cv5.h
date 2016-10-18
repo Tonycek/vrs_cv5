@@ -8,6 +8,8 @@
 #ifndef VRS_CV5_H_
 #define VRS_CV5_H_
 
+extern uint16_t value;
+
 void initNVIC();
 
 void ADC1_IRQHandler (void);

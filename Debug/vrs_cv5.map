@@ -1862,7 +1862,7 @@ LOAD c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib
                 0x000002bd       0x1d c:/program files (x86)/atollic/truestudio for arm 6.0.0/armtools/bin/../lib/gcc/arm-atollic-eabi/5.3.1/armv7-m/crtn.o
 OUTPUT(vrs_cv5.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x3e4d
+.debug_info     0x00000000     0x3e57
  .debug_info    0x00000000      0x55a Libraries\STM32L1xx_StdPeriph_Driver\src\misc.o
  .debug_info    0x0000055a      0xcb5 Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_adc.o
  .debug_info    0x0000120f      0x65f Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_gpio.o
@@ -1872,9 +1872,9 @@ OUTPUT(vrs_cv5.elf elf32-littlearm)
  .debug_info    0x000024a8      0x133 src\stm32l1xx_it.o
  .debug_info    0x000025db      0x568 src\system_stm32l1xx.o
  .debug_info    0x00002b43      0xbcb src\tiny_printf.o
- .debug_info    0x0000370e      0x73f src\vrs_cv5.o
+ .debug_info    0x0000370e      0x749 src\vrs_cv5.o
 
-.debug_abbrev   0x00000000      0xc9d
+.debug_abbrev   0x00000000      0xca6
  .debug_abbrev  0x00000000      0x149 Libraries\STM32L1xx_StdPeriph_Driver\src\misc.o
  .debug_abbrev  0x00000149      0x182 Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_adc.o
  .debug_abbrev  0x000002cb      0x1a9 Libraries\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_gpio.o
@@ -1884,7 +1884,7 @@ OUTPUT(vrs_cv5.elf elf32-littlearm)
  .debug_abbrev  0x0000074b       0x67 src\stm32l1xx_it.o
  .debug_abbrev  0x000007b2      0x149 src\system_stm32l1xx.o
  .debug_abbrev  0x000008fb      0x248 src\tiny_printf.o
- .debug_abbrev  0x00000b43      0x15a src\vrs_cv5.o
+ .debug_abbrev  0x00000b43      0x163 src\vrs_cv5.o
 
 .debug_aranges  0x00000000      0x4d8
  .debug_aranges

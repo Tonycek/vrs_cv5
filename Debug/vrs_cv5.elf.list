@@ -21,25 +21,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   8 .ARM.attributes 00000029  00000000  00000000  00011090  2**0
                   CONTENTS, READONLY
-  9 .debug_info   00003e4d  00000000  00000000  000110b9  2**0
+  9 .debug_info   00003e57  00000000  00000000  000110b9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 00000c9d  00000000  00000000  00014f06  2**0
+ 10 .debug_abbrev 00000ca6  00000000  00000000  00014f10  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 000004d8  00000000  00000000  00015ba8  2**3
+ 11 .debug_aranges 000004d8  00000000  00000000  00015bb8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000440  00000000  00000000  00016080  2**3
+ 12 .debug_ranges 00000440  00000000  00000000  00016090  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00001b4b  00000000  00000000  000164c0  2**0
+ 13 .debug_line   00001b4b  00000000  00000000  000164d0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00001c0a  00000000  00000000  0001800b  2**0
+ 14 .debug_str    00001c0a  00000000  00000000  0001801b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .comment      0000007e  00000000  00000000  00019c15  2**0
+ 15 .comment      0000007e  00000000  00000000  00019c25  2**0
                   CONTENTS, READONLY
- 16 .debug_frame  0000139c  00000000  00000000  00019c94  2**2
+ 16 .debug_frame  0000139c  00000000  00000000  00019ca4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 17 .stab         00000024  00000000  00000000  0001b030  2**2
+ 17 .stab         00000024  00000000  00000000  0001b040  2**2
                   CONTENTS, READONLY, DEBUGGING
- 18 .stabstr      0000003f  00000000  00000000  0001b054  2**0
+ 18 .stabstr      0000003f  00000000  00000000  0001b064  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2851,7 +2851,7 @@ void ADC1_IRQHandler (void){
  8000f44:	b480      	push	{r7}
  8000f46:	b083      	sub	sp, #12
  8000f48:	af00      	add	r7, sp, #0
-	uint16_t value;
+	//uint16_t value;
 	if(ADC1->SR & ADC_SR_EOC)
  8000f4a:	4b07      	ldr	r3, [pc, #28]	; (8000f68 <ADC1_IRQHandler+0x24>)
  8000f4c:	681b      	ldr	r3, [r3, #0]
@@ -2859,7 +2859,7 @@ void ADC1_IRQHandler (void){
  8000f52:	2b00      	cmp	r3, #0
  8000f54:	d002      	beq.n	8000f5c <ADC1_IRQHandler+0x18>
 	{
-		value = ADC1->DR;
+		uint16_t value = ADC1->DR;
  8000f56:	4b04      	ldr	r3, [pc, #16]	; (8000f68 <ADC1_IRQHandler+0x24>)
  8000f58:	6d9b      	ldr	r3, [r3, #88]	; 0x58
  8000f5a:	80fb      	strh	r3, [r7, #6]
