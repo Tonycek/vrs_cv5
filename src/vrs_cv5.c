@@ -19,7 +19,57 @@ void ledInit(){
 	GPIO_Init(GPIOA, &gpioInitStruc);
 }
 
+void initUSART(){
+
+	USART_InitTypeDef USART_InitStructure;
+	  NVIC_InitTypeDef NVIC_InitStructure;
+	  GPIO_InitTypeDef GPIO_InitStructure;
+
+	  /* Enable GPIO clock */       //turning on the needed peripherals
+	  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
+	  RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+
+	  //choosing peripherals for selected pins
+	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
+	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
+
+
+
+	  /* Configure USART Tx and Rx pins */
+	  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_40MHz;
+	  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
+	  GPIO_Init(GPIOA, &GPIO_InitStructure);
+	  //usart configuration
+	  USART_InitStructure.USART_BaudRate = 115200;
+	  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	  USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	  USART_InitStructure.USART_Parity = USART_Parity_No;
+	  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	  USART_Init(USART2, &USART_InitStructure);
+
+	    //configuring interrupts
+	      /* NVIC configuration */
+	      /* Configure the Priority Group to 2 bits */
+	  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+
+	      /* Enable the USARTx Interrupt */
+	  NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
+	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+	  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	  NVIC_Init(&NVIC_InitStructure);
+	    //choosing which event should cause interrupt
+	  USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+	      /* Enable USART */
+	  USART_Cmd(USART2, ENABLE);
+}
+
 void initNVIC(){
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn; //zoznam prerušení nájdete v súbore stm32l1xx.h
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
@@ -28,6 +78,9 @@ void initNVIC(){
 	NVIC_Init(&NVIC_InitStructure);
 
 	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+
+	ADC_ITConfig(ADC1, ADC_IT_OVR, ENABLE);
+
 
 }
 

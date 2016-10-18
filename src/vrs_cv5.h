@@ -12,6 +12,8 @@ extern uint16_t value;
 
 void initNVIC();
 
+void initUSART();
+
 void ADC1_IRQHandler (void);
 
 void ledInit();

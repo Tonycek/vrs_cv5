@@ -89,21 +89,7 @@ int main(void)
 
   /* Infinite loop */
   while (1)
-  {/*
-	ADC_SoftwareStartConv(ADC1);
-	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)){}
-	double AD_value=ADC_GetConversionValue(ADC1);
-
-	for (i=0; i<AD_value * 20; i++){
-	  	 if (i < (AD_value * 10)){
-	  		GPIO_SetBits(GPIOA, GPIO_ODR_ODR_5);
-	  	 }
-	  	 else{
-	  		GPIO_ResetBits(GPIOA, GPIO_ODR_ODR_5);
-	     }
-	}*/
-	//  uint16_t value =0;
-	  //uint16_t temp = value;
+  {
 	  printf("%d", (int)value);
   }
   return 0;
