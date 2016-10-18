@@ -43,13 +43,14 @@ void initUSART(){
 	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
 	  GPIO_Init(GPIOA, &GPIO_InitStructure);
 	  //usart configuration
-	  USART_InitStructure.USART_BaudRate = 115200;
+	  USART_InitStructure.USART_BaudRate = 9600;
 	  USART_InitStructure.USART_WordLength = USART_WordLength_8b;
 	  USART_InitStructure.USART_StopBits = USART_StopBits_1;
 	  USART_InitStructure.USART_Parity = USART_Parity_No;
 	  USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	  USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	  USART_Init(USART2, &USART_InitStructure);
+	  USART_Init(USART1, &USART_InitStructure);
+
 
 	    //configuring interrupts
 	      /* NVIC configuration */
@@ -66,6 +67,7 @@ void initUSART(){
 	  USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
 	      /* Enable USART */
 	  USART_Cmd(USART2, ENABLE);
+
 }
 
 void initNVIC(){

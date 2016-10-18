@@ -65,6 +65,7 @@ int main(void)
   adc_init();
   ledInit();
   initNVIC();
+  initUSART();
 
   //  GPIO_SetBits(GPIOA, GPIO_Pin_5);
 
