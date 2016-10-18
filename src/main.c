@@ -33,6 +33,7 @@ SOFTWARE.
 #include <stdio.h>
 
 #include "vrs_cv5.h"
+#include "stm32l1xx_gpio.h"
 //#include "vrs_cv5.c"
 
 

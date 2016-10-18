@@ -55,7 +55,7 @@ void initUSART(){
 	    //configuring interrupts
 	      /* NVIC configuration */
 	      /* Configure the Priority Group to 2 bits */
-	  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 
 	      /* Enable the USARTx Interrupt */
 	  NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
