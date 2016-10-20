@@ -31,6 +31,7 @@ SOFTWARE.
 #include "stm32l1xx.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "vrs_cv5.h"
 #include "vrs_cv5_2.h"
@@ -94,15 +95,21 @@ int main(void)
   /* TODO - Add your application code here */
   RegisterCallbackUART1(stav);
   PutcUART1('c');
+  char number[5];
   /* Infinite loop */
   while (1)
   {
 	  if (pom1 == 1){
 		  PutcUART1(value);
+	//	  PutString((uint8_t)value);
 		  pom1 = 0;
 	  }
 	   if (pom1 == 2){
-		   PutcUART1(value);
+		   double * volt = (double*) malloc (sizeof(double));
+		   *volt = (double)value/4095*3;
+		//   itoa((double)volt, number, 10);
+		 //  PutcUART1(number);
+		   PutcUART1(*volt);
 		   pom1 = 0;
 	   }
 

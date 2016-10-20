@@ -142,7 +142,7 @@ void adc_init(void)
  ADC_SoftwareStartConv(ADC1);
 }
 
-void PutcUART1(int ch){
+void PutcUART1(double ch){
     USART_SendData(USART1, ch);
         while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
 }

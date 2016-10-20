@@ -24,7 +24,11 @@ void adc_init(void);
 
 void initko();
 
-void PutcUART1(int ch);
+//void PutcUART1(int ch);
+
+void PutcUART1(double ch);
+
+//void PutString(double str);
 
 void RegisterCallbackUART1(void *callback);
 
