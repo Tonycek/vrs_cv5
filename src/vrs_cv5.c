@@ -6,6 +6,9 @@
  */
 #include "stm32l1xx.h"
 #include "vrs_cv5.h"
+#include "vrs_cv5_2.h"
+
+//int value;
 
 void ledInit(){
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
@@ -19,8 +22,11 @@ void ledInit(){
 	GPIO_Init(GPIOA, &gpioInitStruc);
 }
 
+int value;
+
 void initUSART(){
 
+	value = 0;
 	USART_InitTypeDef USART_InitStructure;
 	  NVIC_InitTypeDef NVIC_InitStructure;
 	  GPIO_InitTypeDef GPIO_InitStructure;
@@ -65,6 +71,7 @@ void initUSART(){
 	  NVIC_Init(&NVIC_InitStructure);
 	    //choosing which event should cause interrupt
 	  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+	  ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 	      /* Enable USART */
 	  USART_Cmd(USART1, ENABLE);
 
@@ -74,7 +81,7 @@ void initNVIC(){
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn; //zoznam prerušení nájdete v súbore stm32l1xx.h
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
@@ -86,11 +93,14 @@ void initNVIC(){
 
 }
 
+
+
 void ADC1_IRQHandler (void){
-	uint16_t temp;
+
+//	extern uint16_t value;
 	if(ADC1->SR & ADC_SR_EOC)
 	{
-		temp = ADC1->DR;
+		value = ADC1->DR;
 	}
 }
 
@@ -132,8 +142,8 @@ void adc_init(void)
  ADC_SoftwareStartConv(ADC1);
 }
 
-void PutcUART1(char ch){
-    USART_SendData(USART1, (uint8_t) ch);
+void PutcUART1(int ch){
+    USART_SendData(USART1, ch);
         while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
 }
 
@@ -156,10 +166,14 @@ void USART1_IRQHandler(void)
         }
 }
 
+//int value;
+int tmp;
+int pom1;
+
 void stav(uint16_t hodnota){
 
-	int pom1=0;
-//	uint16_t value;
+//	int pom1=0;
+//	value;
 
 //	char ch=0;
 //	ch = (char) hodnota;
@@ -167,11 +181,8 @@ void stav(uint16_t hodnota){
 	case 'a' :
 		pom1=1;
 		break;
-	case 'b' :
+	case 'm' :
 		pom1=2;
-		break;
-	case 'c' :
-		pom1=3;
 		break;
 	}
 }

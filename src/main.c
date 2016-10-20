@@ -33,6 +33,8 @@ SOFTWARE.
 #include <stdio.h>
 
 #include "vrs_cv5.h"
+#include "vrs_cv5_2.h"
+//#include "vrs_cv5.c"
 #include "stm32l1xx_gpio.h"
 //#include "vrs_cv5.c"
 
@@ -56,7 +58,9 @@ SOFTWARE.
 
 
 
-uint16_t value;
+//int value;
+extern int pom1;
+int value;
 
 
 
@@ -93,7 +97,16 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+	  if (pom1 == 1){
+		  PutcUART1(value);
+		  pom1 = 0;
+	  }
+	   if (pom1 == 2){
+		   PutcUART1(value);
+		   pom1 = 0;
+	   }
 
+	 //  value = 0;
 //	  printf("%d", (int)value);
 	//  PutcUART1('c');
 	 // pom = USART_ReceiveData('a');

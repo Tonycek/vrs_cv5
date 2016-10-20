@@ -8,7 +8,9 @@
 #ifndef VRS_CV5_H_
 #define VRS_CV5_H_
 
-extern uint16_t value;
+//extern int value;// temp;
+extern int pom1;
+//extern int temp;
 
 void initNVIC();
 
@@ -20,7 +22,9 @@ void ledInit();
 
 void adc_init(void);
 
-void PutcUART1(char ch);
+void initko();
+
+void PutcUART1(int ch);
 
 void RegisterCallbackUART1(void *callback);
 
