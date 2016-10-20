@@ -88,12 +88,15 @@ int main(void)
   */
 
   /* TODO - Add your application code here */
-
+  RegisterCallbackUART1(stav);
+  PutcUART1('c');
   /* Infinite loop */
   while (1)
   {
-	  RegisterCallbackUART1(stav);
-	  printf("%d", (int)value);
+
+//	  printf("%d", (int)value);
+	//  PutcUART1('c');
+	 // pom = USART_ReceiveData('a');
   }
   return 0;
 }

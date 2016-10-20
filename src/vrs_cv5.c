@@ -59,7 +59,7 @@ void initUSART(){
 
 	      /* Enable the USARTx Interrupt */
 	  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	  NVIC_Init(&NVIC_InitStructure);
@@ -79,18 +79,18 @@ void initNVIC(){
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 
-	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+//	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 
-	ADC_ITConfig(ADC1, ADC_IT_OVR, ENABLE);
+//	ADC_ITConfig(ADC1, ADC_IT_OVR, ENABLE);
 
 
 }
 
 void ADC1_IRQHandler (void){
-	//uint16_t value;
+	uint16_t temp;
 	if(ADC1->SR & ADC_SR_EOC)
 	{
-		uint16_t value = ADC1->DR;
+		temp = ADC1->DR;
 	}
 }
 
@@ -159,11 +159,11 @@ void USART1_IRQHandler(void)
 void stav(uint16_t hodnota){
 
 	int pom1=0;
+//	uint16_t value;
 
-
-	char ch=0;
-	ch = (char) hodnota;
-	switch (ch){
+//	char ch=0;
+//	ch = (char) hodnota;
+	switch (hodnota){
 	case 'a' :
 		pom1=1;
 		break;
