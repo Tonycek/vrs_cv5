@@ -27,11 +27,11 @@ void initUSART(){
 
 	  /* Enable GPIO clock */       //turning on the needed peripherals
 	  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-	  RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
+	  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 
 	  //choosing peripherals for selected pins
-	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
-	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
+	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
+	  GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
 
 
 
@@ -40,7 +40,7 @@ void initUSART(){
 	  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_40MHz;
 	  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 	  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
+	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10 | GPIO_Pin_9;
 	  GPIO_Init(GPIOA, &GPIO_InitStructure);
 	  //usart configuration
 	  USART_InitStructure.USART_BaudRate = 9600;
@@ -58,15 +58,15 @@ void initUSART(){
 	  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 
 	      /* Enable the USARTx Interrupt */
-	  NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
+	  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
 	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
 	  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	  NVIC_Init(&NVIC_InitStructure);
 	    //choosing which event should cause interrupt
-	  USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+	  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 	      /* Enable USART */
-	  USART_Cmd(USART2, ENABLE);
+	  USART_Cmd(USART1, ENABLE);
 
 }
 
@@ -130,4 +130,48 @@ void adc_init(void)
  }
  /* Start ADC Software Conversion */
  ADC_SoftwareStartConv(ADC1);
+}
+
+void PutcUART1(char ch){
+    USART_SendData(USART1, (uint8_t) ch);
+        while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
+}
+
+void (* gCallback1)(unsigned char) = 0;
+void RegisterCallbackUART1(void *callback){
+    gCallback1 = callback;
+}
+
+void USART1_IRQHandler(void)
+{
+    uint8_t pom = 0;
+        if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+        {
+            USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+            pom = USART_ReceiveData(USART1);
+            if (gCallback1)
+            {
+                gCallback1(pom);
+            }
+        }
+}
+
+void stav(uint16_t hodnota){
+
+	int pom1=0;
+
+
+	char ch=0;
+	ch = (char) hodnota;
+	switch (ch){
+	case 'a' :
+		pom1=1;
+		break;
+	case 'b' :
+		pom1=2;
+		break;
+	case 'c' :
+		pom1=3;
+		break;
+	}
 }

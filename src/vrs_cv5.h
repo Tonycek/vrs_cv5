@@ -20,6 +20,12 @@ void ledInit();
 
 void adc_init(void);
 
+void PutcUART1(char ch);
 
+void RegisterCallbackUART1(void *callback);
+
+void USART1_IRQHandler(void);
+
+void stav(uint16_t hodnota);
 
 #endif /* VRS_CV5_H_ */

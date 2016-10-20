@@ -92,6 +92,7 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
+	  RegisterCallbackUART1(stav);
 	  printf("%d", (int)value);
   }
   return 0;
