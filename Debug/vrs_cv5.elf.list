@@ -3391,7 +3391,6 @@ int main(void)
  8001718:	4618      	mov	r0, r3
  800171a:	4621      	mov	r1, r4
  800171c:	f000 fa60 	bl	8001be0 <PutcUART1>
-	//	  PutString((uint8_t)value);
 		  pom1 = 0;
  8001720:	4b1c      	ldr	r3, [pc, #112]	; (8001794 <main+0xbc>)
  8001722:	2200      	movs	r2, #0
@@ -3426,8 +3425,6 @@ int main(void)
  8001760:	460c      	mov	r4, r1
  8001762:	68ba      	ldr	r2, [r7, #8]
  8001764:	e882 0018 	stmia.w	r2, {r3, r4}
-		//   itoa((double)volt, number, 10);
-		 //  PutcUART1(number);
 		   PutcUART1(*volt);
  8001768:	68bb      	ldr	r3, [r7, #8]
  800176a:	cb18      	ldmia	r3, {r3, r4}
@@ -3438,11 +3435,8 @@ int main(void)
  8001774:	4b07      	ldr	r3, [pc, #28]	; (8001794 <main+0xbc>)
  8001776:	2200      	movs	r2, #0
  8001778:	601a      	str	r2, [r3, #0]
+	   }
 
-	 //  value = 0;
-//	  printf("%d", (int)value);
-	//  PutcUART1('c');
-	 // pom = USART_ReceiveData('a');
   }
  800177a:	e7c2      	b.n	8001702 <main+0x2a>
  800177c:	f3af 8000 	nop.w
@@ -4148,8 +4142,8 @@ void initUSART(){
 	  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
  8001a8c:	2325      	movs	r3, #37	; 0x25
  8001a8e:	733b      	strb	r3, [r7, #12]
-	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
- 8001a90:	2300      	movs	r3, #0
+	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4;
+ 8001a90:	2304      	movs	r3, #4
  8001a92:	737b      	strb	r3, [r7, #13]
 	  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
  8001a94:	2300      	movs	r3, #0
@@ -4202,8 +4196,8 @@ void initNVIC(){
 	NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn; //zoznam prerušení nájdete v súbore stm32l1xx.h
  8001aee:	2312      	movs	r3, #18
  8001af0:	713b      	strb	r3, [r7, #4]
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4;
- 8001af2:	2304      	movs	r3, #4
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+ 8001af2:	2300      	movs	r3, #0
  8001af4:	717b      	strb	r3, [r7, #5]
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
  8001af6:	2300      	movs	r3, #0
@@ -4478,11 +4472,7 @@ void stav(uint16_t hodnota){
  8001c8c:	af00      	add	r7, sp, #0
  8001c8e:	4603      	mov	r3, r0
  8001c90:	80fb      	strh	r3, [r7, #6]
-//	int pom1=0;
-//	value;
 
-//	char ch=0;
-//	ch = (char) hodnota;
 	switch (hodnota){
  8001c92:	88fb      	ldrh	r3, [r7, #6]
  8001c94:	2b61      	cmp	r3, #97	; 0x61
@@ -4497,8 +4487,8 @@ void stav(uint16_t hodnota){
 }
  8001c9c:	e007      	b.n	8001cae <stav+0x26>
 
-//	char ch=0;
-//	ch = (char) hodnota;
+void stav(uint16_t hodnota){
+
 	switch (hodnota){
 	case 'a' :
 		pom1=1;

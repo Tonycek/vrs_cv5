@@ -172,11 +172,6 @@ int pom1;
 
 void stav(uint16_t hodnota){
 
-//	int pom1=0;
-//	value;
-
-//	char ch=0;
-//	ch = (char) hodnota;
 	switch (hodnota){
 	case 'a' :
 		pom1=1;
