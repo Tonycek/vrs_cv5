@@ -65,7 +65,7 @@ void initUSART(){
 
 	      /* Enable the USARTx Interrupt */
 	  NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4;
 	  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	  NVIC_Init(&NVIC_InitStructure);
@@ -81,7 +81,7 @@ void initNVIC(){
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 	NVIC_InitTypeDef NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn; //zoznam prerušení nájdete v súbore stm32l1xx.h
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 4;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
