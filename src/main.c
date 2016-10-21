@@ -94,22 +94,25 @@ int main(void)
 
   /* TODO - Add your application code here */
   RegisterCallbackUART1(stav);
-  PutcUART1('c');
+//  PutcUART1('c');
   char number[5];
   /* Infinite loop */
   while (1)
   {
-	  if (pom1 == 1){
-		  PutcUART1(value);
-		  pom1 = 0;
-	  }
 	   if (pom1 == 2){
-		   double * volt = (double*) malloc (sizeof(double));
-		   *volt = (double)value/4095*3;
-		   PutcUART1(*volt);
-		   pom1 = 0;
-	   }
+		   i++;
+		   if(i%2 == 0){
+			   PutcUART1(value);
+			   pom1 = 0;
+		   }
 
+		   if(i%2 == 1){
+			   double * volt = (double*) malloc (sizeof(double));
+			   *volt = (double)value/4095*3;
+			   PutcUART1(*volt);
+			   pom1 = 0;
+		   }
+	   }
   }
   return 0;
 }
