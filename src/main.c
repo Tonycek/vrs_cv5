@@ -108,7 +108,7 @@ int main(void)
 
 		   if(i%2 == 1){
 			   double * volt = (double*) malloc (sizeof(double));
-			   *volt = (double)value/4095*3;
+			   *volt = (double)value/4095*3.3;
 			   PutcUART1(*volt);
 			   pom1 = 0;
 		   }
