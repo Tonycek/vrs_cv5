@@ -34,6 +34,10 @@ void RegisterCallbackUART1(void *callback);
 
 void USART1_IRQHandler(void);
 
+void odosliString(char pole[]);
+
+double prevodNaVolty();
+
 void stav(uint16_t hodnota);
 
 #endif /* VRS_CV5_H_ */

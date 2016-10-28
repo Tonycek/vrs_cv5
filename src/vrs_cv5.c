@@ -166,18 +166,57 @@ void USART1_IRQHandler(void)
         }
 }
 
+char pole[];
+void odosliString(char pole[])
+{
+	int i=0;
+
+	while(pole[i]!='\0')
+	{
+
+		USART_SendData(USART1, pole[i]);
+	    while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
+	    i++;
+	}
+
+	USART_SendData(USART1,' ');
+    while(USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);
+}
+
+double prevodNaVolty()
+{
+	double tmpPrevod=0;
+	tmpPrevod=value;
+	return  tmpPrevod*=0.000805;
+}
+
 //int value;
 int tmp;
 int pom1;
+int i = 0;
 
 void stav(uint16_t hodnota){
 
 	switch (hodnota){
-	case 'a' :
+/*	case 'a' :
 		pom1=1;
-		break;
+		break;*/
 	case 'm' :
-		pom1=2;
+		if(i%2 == 0){
+			/*PutcUART1(value);
+			pom1 = 0;*/
+			sprintf(pole,"%d",value);
+			odosliString(pole);
+        }
+
+		if(i%2 == 1){
+		    double pomocnaPreVolt = prevodNaVolty();
+
+		    uint8_t volt= (uint8_t)pomocnaPreVolt;
+		    sprintf(pole,"%d.%dV", volt, (uint8_t)((pomocnaPreVolt-volt)*100));
+		    odosliString(pole);
+		}
+		i++;
 		break;
 	}
 }
