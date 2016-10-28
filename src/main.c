@@ -114,6 +114,7 @@ int main(void)
 			   pom1 = 0;
 		   }
 	   }*/
+	  stav((uint8_t)'m');
   }
   return 0;
 }

@@ -71,6 +71,7 @@ void initUSART(){
 	  NVIC_Init(&NVIC_InitStructure);
 	    //choosing which event should cause interrupt
 	  USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+	  USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
 	  ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 	      /* Enable USART */
 	  USART_Cmd(USART1, ENABLE);
@@ -155,7 +156,7 @@ void RegisterCallbackUART1(void *callback){
 void USART1_IRQHandler(void)
 {
     uint8_t pom = 0;
-        if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+/*      if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
         {
             USART_ClearITPendingBit(USART1, USART_IT_RXNE);
             pom = USART_ReceiveData(USART1);
@@ -163,7 +164,18 @@ void USART1_IRQHandler(void)
             {
                 gCallback1(pom);
             }
-        }
+        }*/
+
+    if (USART_GetFlagStatus(USART1, USART_FLAG_TC) != RESET)
+    {
+    	if (USART_GetFlagStatus(USART1, USART_FLAG_TXE) != RESET)
+    	{
+    		USART_SendData(USART1,'b');
+    		USART_ClearITPendingBit(USART1, USART_FLAG_TXE);
+    	//	i++;
+    		USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET;
+    	}
+	}
 }
 
 char pole[];
